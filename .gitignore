@@ -1,0 +1,28 @@
+# Quartus output
+db/
+incremental_db/
+output_files/
+greybox_tmp/
+simulation/
+*.qws
+*.rpt
+*.summary
+*.smsg
+*.done
+*.jdi
+*.pin
+*.sof
+*.qdf
+*.sld
+build_id.v
+c5_pin_model_dump.txt
+PLLJ_PLLSPE_INFO.txt
+build.out
+.DS_Store
+# simulation: user-supplied ROMs and tapes, build and run output
+verilator/files/
+verilator/obj*/
+verilator/out*/
+verilator/tests/out/
+verilator/tests/kbd/obj/
+verilator/ef9345_charset.hex

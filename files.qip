@@ -1,0 +1,16 @@
+# Philips VG5000: machine (rtl/vg5000.sv), EF9345 (rtl/ef9345/, CERN-OHL-S-2.0), t80sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/t80sv/t80sv_all.sv
+set_global_assignment -name QIP_FILE rtl/ef9345/ef9345.qip
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_clocks.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5000.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_keyboard.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_wav.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_tape.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_tape_ddr.sv
+set_global_assignment -name SEARCH_PATH rtl
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_tape_overlay.sv
+set_global_assignment -name QIP_FILE rtl/pll.qip
+set_global_assignment -name QIP_FILE sys/sys.qip
+set_global_assignment -name SDC_FILE VG5000.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE VG5000.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/vg5k_tape_rec.sv

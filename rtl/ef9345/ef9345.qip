@@ -1,0 +1,13 @@
+# EF9345 for the VG5000 MiSTer core (CERN-OHL-S-2.0, see LICENSE). Top: ef9345_vg5k.
+# Character ROM: romchar0.hex / romchar1.hex, read by $readmemh relative to the
+# project directory (rtl/ef9345/...).
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) EF9345_BRAM_TDP.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) RAM64X8.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) VRAM.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) ROMCHAR0.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) ROMCHAR1.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) CharactersDecoder.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) EF9345_Controller.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) EF9345.sv]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) ef9345_vg5k.sv]
+set_global_assignment -name SEARCH_PATH [file join $::quartus(qip_path)]

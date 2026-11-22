@@ -1,0 +1,21 @@
+# name	tape (relative to verilator/) or -	extra args	frames	expect
+# expect: text:STRING (in the BASIC screen buffer, RAM 4000-47CF, at the end)
+#         ok:STRING  (as text:, and the last frame shows at least 2 colours)
+# Options are separated by spaces; inside a value '_' stands for a space. --until stops early.
+boot	-	-	150	ok:13758 octets disponibles
+boot_v10	-	--rom files/vg5k10.bin	150	text:Ok
+print	-	--type PRINT_12*3\n@120	320	ok: 36
+program	-	--type 10_FOR_I=1_TO_5:PRINT_I*I;:NEXT_I\nRUN\n@120	600	text: 1 4 9 16 25
+paste	-	--paste PRINT_"AB";7+8\n@120	700	text:AB 15
+mem32	-	--mem 32 --type PRINT_FRE(0)\n@120	400	text: 30142
+mem48	-	--mem 48 --type PRINT_FRE(0)\n@120	400	text:-19010
+nmi	-	--type PRINT_1\n@120 --nmi 250	400	text:Ok
+cload_lode	files/Lode-Runner.k7	--turbo --type CLOAD\n@120 --until Ok	1500	text:Trouv.:LODRUN
+cload_tetris	files/Tetris.k7	--turbo --type CLOAD\n@120 --until Ok	1500	text:VG5000
+cload_citadelle	files/Citadelle (1984)(Philips)[10].k7	--turbo --type CLOAD\n@120	2200	text:M A G N E T O P H O N E
+cload_darkstar	files/dark-star_vg5000.k7	--turbo --type CLOAD\n@120 --until Ok	2500	text:Ok
+cload_wav_tetris	files/tetris_vg5000.wav	--turbo --type CLOAD\n@120 --until Ok	2500	text:VG5000
+
+# MAME 0.283 prints "NEXT sans FOR en 10" for '10 FOR I=1 TO 5:PRINT I*I;:NEXT' (no variable) too: BASIC, not the core
+next_quirk	-	--type 10_FOR_I=1_TO_5:PRINT_I*I;:NEXT\nRUN\n@120	600	text:NEXT sans FOR en 10
+paste_twice	-	--paste AB_ab\n@120	400	text:AB AB

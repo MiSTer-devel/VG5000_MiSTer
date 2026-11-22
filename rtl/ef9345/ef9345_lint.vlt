@@ -1,0 +1,37 @@
+`verilator_config
+// Lint waivers for the Verilog translation of the orpigame EF9345 core.
+// Run:  verilator --lint-only -Wall -Irtl/ef9345 --top-module EF9345 rtl/ef9345/ef9345_lint.vlt rtl/ef9345/*.sv
+// Every waiver below is a property of the original VHDL design, kept on purpose
+// by the translation (changing it would change the reference behaviour).
+
+// The design has no reset: every register starts from its declaration value
+// (VHDL signal initial values; 0 where the VHDL gives none), as on the FPGA.
+lint_off -rule PROCASSINIT -file "*EF9345_Controller.sv"
+lint_off -rule PROCASSINIT -file "*CharactersDecoder.sv"
+lint_off -rule PROCASSINIT -file "*EF9345_BRAM_TDP.sv"
+
+// STEP5 is declared in the VHDL state type (MAE_LIST) but never used.
+lint_off -rule UNUSEDPARAM -file "*EF9345_Controller.sv" -match "*STEP5*"
+
+// v_Count >= YTopBorder with YTopBorder = 0 (EF9345_Defines.vhd): always true.
+lint_off -rule UNSIGNED -file "*EF9345_Controller.sv" -match "*Comparison is constant*"
+
+// Bits of VHDL signals the design never reads (widths kept from the VHDL):
+//  CurrentR2[5:4,2,0], CurrentCommand[2], CurrentCmd[3:2], ROR_Int[2] (Z3, 8 KB),
+//  BlockPointer[3] (Z3), MainPointer/AuxiliaryPointer/YORAddress/UserAddress[10]
+//  (only 10 VRAM address bits), R2[3,1] in the decoder.
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*CurrentR2*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*CurrentCommand*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*CurrentCmd*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*ROR_Int*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*BlockPointer*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*MainPointer*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*AuxiliaryPointer*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*YORAddress*"
+lint_off -rule UNUSEDSIGNAL -file "*EF9345_Controller.sv" -match "*UserAddress'*"
+lint_off -rule UNUSEDSIGNAL -file "*CharactersDecoder.sv" -match "*'R2'*"
+// ROM0Address[4] / ROM1Address[4]: the 5-bit slice adder of the ROM address
+// replaces bit 4 of the base address (see the README finding on the G10 mask
+// at $190, read at $180).
+lint_off -rule UNUSEDSIGNAL -file "*CharactersDecoder.sv" -match "*ROM0Address*"
+lint_off -rule UNUSEDSIGNAL -file "*CharactersDecoder.sv" -match "*ROM1Address*"

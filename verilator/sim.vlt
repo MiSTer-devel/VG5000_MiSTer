@@ -1,0 +1,10 @@
+`verilator_config
+lint_off -rule WIDTH
+lint_off -rule UNUSED
+lint_off -rule CASEINCOMPLETE
+lint_off -rule PINMISSING
+lint_off -rule UNOPTFLAT
+lint_off -rule MULTIDRIVEN
+public_flat_rd -module "vg5000" -var "ram"
+public_flat_rd -module "vg5000" -var "xram"
+public_flat_rd -module "vg5000" -var "rom"
